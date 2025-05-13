@@ -37,6 +37,24 @@ class TestDrone(unittest.TestCase):  # defining the test class to inherit from u
         self.drone.fly()    # rotation complete and flying continuously down
         self.assertEqual(self.drone.status(), "Position: (1, -1), Direction: South")
 
+    def test_boundary(self):
+        self.drone.launch(0, 0, "North")  # this positions the drone at the bottom left, facing North
+        for _ in range(6):            # This is to test the drone and ensure it stays within parameters
+            self.drone.fly()      # Attempt to fly
+            self.assertEqual(self.drone.status(), "Position: (0, 5), Direction: NORTH")
+
+        self.drone.launch(5, 5, "East")   # This positions the drone at the top right
+        self.drone.fly()  # Attempt to fly east
+        self.assertEqual(self.drone.status(), "Position: (5, 5), Direction: EAST")  # Check the position after flying
+
+        self.drone.launch(0, 0, "SOUTH")  # This positions the drone bottom right
+        self.drone.fly()  # Attempt to fly south
+        self.assertEqual(self.drone.status(), "Position: (0, 0), Direction: SOUTH")  # The drone should not move
+
+        self.drone.launch(0, 0, "WEST")   # This positions the drone at the top left
+        self.drone.fly()  # Attempt to fly west
+        self.assertEqual(self.drone.status(), "Position: (0, 0), Direction: WEST")  # Should not move
+
 
 if __name__ == "__main__":
     unittest.main()
