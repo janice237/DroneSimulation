@@ -10,7 +10,12 @@ class Drone:
         self.x = x
         self.y = y
         self.direction = direction
-        print(f"X coordinate: {self.x},Y coordinate:{self.y},Direction:{self.direction}")
+        if not (0 <= x <= self.max_x and 0 <= x <= self.max_y):       # checks if the coordinates are within boundary
+            print("Coordinates are out of bounds")
+        valid_directions = ["North", "South", "West","East"]
+        if direction not in valid_directions:
+            print("Invalid direction")
+        print(f"X coordinate: {self.x},Y coordinate:{self.y},Direction:{self.direction}")  # prints out the position and direction
 
     # This is the Flying Method
     def fly(self):  # moving the drone based on its current position
@@ -26,10 +31,8 @@ class Drone:
     # This is moving the drone in several directions
     def right(self):
         directions = ['North', 'East', 'South', 'West']  # Initializing the different possible directions
-        current_index = directions.index(
-            self.direction)  # This goes to the direction list and takes the current position(index) of the drone.
-        self.direction = directions[(
-                                                current_index + 1) % 4]  # This moves to the next position in the list and wraps around to 4 which signifies all the positions
+        current_index = directions.index(self.direction)  # This goes to the direction list and takes the current position(index) of the drone.
+        self.direction = directions[(current_index + 1) % 4]  # This moves to the next position in the list and wraps around to 4 which signifies all the positions
 
     def left(self):
         directions = ['North', 'West', 'South', 'East']
