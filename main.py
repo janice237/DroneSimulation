@@ -1,19 +1,20 @@
 # main.py
 from commandProcessor import CommandProcessor
 
+
 def main():
     drone = CommandProcessor(max_x=5, max_y=5)
 
-    print("Welcome to the Drone Simulation!")
-    print("Enter commands to control the drone:")
+    max_attempts = 7
+    for attempt in range(max_attempts):
+        initial_input = print("Enter an initial position and direction(x,y direction)")
+        x, y, direction = initial_input.split(",")
 
-    while True:
-       initial_input = input('Enter initial position and direction(x,y, direction):')
-       x,y,direction = initial_input.strip().split(",")
+    print(f"Parsed values -x:{x}, -y:{y}, -direction:{direction}")
+    drone.add_command = print(f"Launch{x},{y},{direction}:")
+    print(drone.status())  # Show status
+    print(f"current position is ({x}), ({y}), ({direction.upper()}")
 
-       print(f"LAUNCH {x},{y},{direction.upper()}")
-
-            return main()
 
 if __name__ == "__main__":
     main()

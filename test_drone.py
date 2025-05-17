@@ -8,7 +8,7 @@ class TestDrone(unittest.TestCase):  # defining the test class to inherit from u
 
     # This checks the initial state of the drone
     def test_initial_status(self):
-        self.assertEqual(self.drone.status(), "Position:(0, 0), Direction: North")
+        self.assertEqual(self.drone.status(), "Position: (0, 0), Direction: North")
 
     # This checks if the drone moves north correctly
     def test_fly_north(self):
@@ -39,7 +39,7 @@ class TestDrone(unittest.TestCase):  # defining the test class to inherit from u
         self.drone.launch(0, 0, "North")  # this positions the drone at the bottom left, facing North
         for _ in range(5):            # This is to test the drone and ensure it stays within parameters
             self.drone.fly()      # Attempt to fly
-            self.assertEqual(self.drone.status(), "Position: (0, 5), Direction: North")
+            self.assertEqual(self.drone.status(), "Position: (0, 5), Direction: North")    # should hit boundary
 
         self.drone.launch(5, 5, "East")   # This positions the drone at the top right
         self.drone.fly()  # Attempt to fly east
@@ -53,13 +53,12 @@ class TestDrone(unittest.TestCase):  # defining the test class to inherit from u
         self.drone.fly()  # Attempt to fly west
         self.assertEqual(self.drone.status(), "Position: (0, 0), Direction: West")  # Should not move
 
-    #This should throw an error
-    def invalid_launch(self):
-        self.drone.launch(6,6, "North")
+    def test_invalid_launch(self):
+        self.drone.launch(6, 6, "North")
         print("Out of boundary")
 
-    def invalid_direction(self):
-        self.drone.launch(1,1,"UP")
+    def test_invalid_direction(self):
+        self.drone.launch(1, 1, "UP")
         print("Invalid direction")
 
 

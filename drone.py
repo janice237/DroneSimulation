@@ -12,7 +12,7 @@ class Drone:
         self.direction = direction
         if not (0 <= x <= self.max_x and 0 <= x <= self.max_y):       # checks if the coordinates are within boundary
             print("Coordinates are out of bounds")
-        valid_directions = ["North", "South", "West","East"]
+        valid_directions = ["North", "South", "West", "East"]
         if direction not in valid_directions:
             print("Invalid direction")
         print(f"X coordinate: {self.x},Y coordinate:{self.y},Direction:{self.direction}")  # prints out the position and direction
@@ -27,6 +27,8 @@ class Drone:
             self.x += 1  # It moves continuously to the right
         elif self.direction == "West" and self.x > 0:  # This checks if the current y coordinate is above the lover boundary
             self.x -= 1  # It moves on the opposite of the x coordinate, that is the left
+        else:
+            print("Move blocked: Drone cannot go beyond the boundary.")
 
     # This is moving the drone in several directions
     def right(self):
